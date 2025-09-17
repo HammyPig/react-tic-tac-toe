@@ -70,20 +70,37 @@ export default function Game() {
 
   const boardSquares = boardSquaresHistory[turnNumber];
   const turnsTakenList = boardSquaresHistory.map((boardSquares, i) => {
-    let description;
+    let turnNumberAsText;
     if (i == 0) {
-      description = "Go to game start";
+      turnNumberAsText = "game start";
     } else {
-      description = "Go to turn #" + i;
+      turnNumberAsText = "turn #" + i;
     }
 
-    return (
+    const currentTurnText = (
+      <li key={i}>
+        <p>
+          {"You are at " + turnNumberAsText}
+        </p>
+      </li>
+    );
+
+    const goToTurnButton = (
       <li key={i}>
         <button onClick={() => setTurnNumber(i)}>
-          {description}
+          {"Go to " + turnNumberAsText}
         </button>
       </li>
     );
+
+    let content;
+    if (turnNumber == i) {
+      content = currentTurnText;
+    } else {
+      content = goToTurnButton;
+    }
+
+    return content;
   });
 
   return (
