@@ -1,5 +1,7 @@
 import { useState } from "react";
 
+const players = ["X", "O"];
+
 function Square({ value, onSquareClick }) {
   return (
     <button className="square" onClick={onSquareClick}>
@@ -10,11 +12,18 @@ function Square({ value, onSquareClick }) {
 
 export default function Board() {
   const [squares, setSquares] = useState(Array(9).fill(null));
+  const [playerTurn, setPlayerTurn] = useState(0);
 
   function handleClick(i) {
+    if (squares[i]) {
+      return;
+    }
+
     const nextSquares = squares.slice();
-    nextSquares[i] = "X";
+    nextSquares[i] = players[playerTurn];
     setSquares(nextSquares);
+    
+    setPlayerTurn((playerTurn + 1) % players.length);
   }
 
   return (
