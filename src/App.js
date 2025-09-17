@@ -26,8 +26,23 @@ export default function Board() {
     setPlayerTurn((playerTurn + 1) % players.length);
   }
 
+  const winner = getWinner(squares);
+  const isGameOver = !squares.includes(null) || winner
+  let statusMessage;
+
+  if (isGameOver) {
+    if (winner) {
+      statusMessage = "Player " + winner + " wins!";
+    } else {
+      statusMessage = "It's a draw!"
+    }
+  } else {
+    statusMessage = "Player Turn: " + (players[playerTurn]);
+  }
+
   return (
     <>
+      <div className="status">{statusMessage}</div>
       <div className="board-row">
         <Square value={squares[0]} onSquareClick={() => handleClick(0)} />
         <Square value={squares[1]} onSquareClick={() => handleClick(1)} />
