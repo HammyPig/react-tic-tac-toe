@@ -10,14 +10,14 @@ function Square({ value, onSquareClick }) {
   );
 }
 
-function Board({ squares, playerTurn, onPlay }) {
+function Board({ squares, turnNumber, onPlay }) {
   function handleClick(i) {
     if (squares[i] || getWinner(squares)) {
       return;
     }
 
     const nextSquares = squares.slice();
-    nextSquares[i] = players[playerTurn];
+    nextSquares[i] = getPlayerTurn(turnNumber);
     onPlay(nextSquares);
   }
 
@@ -32,7 +32,7 @@ function Board({ squares, playerTurn, onPlay }) {
       statusMessage = "It's a draw!"
     }
   } else {
-    statusMessage = "Player Turn: " + (players[playerTurn]);
+    statusMessage = "Player Turn: " + getPlayerTurn(turnNumber);
   }
 
   return (
@@ -58,7 +58,6 @@ function Board({ squares, playerTurn, onPlay }) {
 }
 
 export default function Game() {
-  const [playerTurn, setPlayerTurn] = useState(0);
   const [boardSquaresHistory, setBoardSquaresHistory] = useState([Array(9).fill(null)]);
   const [turnNumber, setTurnNumber] = useState(0);
 
@@ -66,12 +65,7 @@ export default function Game() {
     setBoardSquaresHistory([...boardSquaresHistory.slice(0, turnNumber + 1), nextBoardSquares]);
 
     const nextTurnNumber = turnNumber + 1;
-    handleJumpToTurn(nextTurnNumber);
-  }
-
-  function handleJumpToTurn(nextTurnNumber) {
     setTurnNumber(nextTurnNumber);
-    setPlayerTurn(nextTurnNumber % players.length);
   }
 
   const boardSquares = boardSquaresHistory[turnNumber];
@@ -85,7 +79,7 @@ export default function Game() {
 
     return (
       <li key={i}>
-        <button onClick={() => handleJumpToTurn(i)}>
+        <button onClick={() => setTurnNumber(i)}>
           {description}
         </button>
       </li>
@@ -95,13 +89,17 @@ export default function Game() {
   return (
     <div className="game">
       <div className="game-board">
-        <Board squares={boardSquares} playerTurn={playerTurn} onPlay={handlePlay} />
+        <Board squares={boardSquares} turnNumber={turnNumber} onPlay={handlePlay} />
       </div>
       <div className="game-info">
         <ol>{turnsTakenList}</ol>
       </div>
     </div>
   );
+}
+
+function getPlayerTurn(turnNumber) {
+  return players[turnNumber % players.length];
 }
 
 function getWinner(squares) {
