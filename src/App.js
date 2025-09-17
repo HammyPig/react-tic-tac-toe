@@ -60,18 +60,45 @@ function Board({ squares, playerTurn, onPlay }) {
 export default function Game() {
   const [playerTurn, setPlayerTurn] = useState(0);
   const [boardSquaresHistory, setBoardSquaresHistory] = useState([Array(9).fill(null)]);
+  const [turnNumber, setTurnNumber] = useState(0);
 
   function handlePlay(nextBoardSquares) {
-    setBoardSquaresHistory([...boardSquaresHistory, nextBoardSquares]);
-    setPlayerTurn((playerTurn + 1) % players.length);
+    setBoardSquaresHistory([...boardSquaresHistory.slice(0, turnNumber + 1), nextBoardSquares]);
+
+    const nextTurnNumber = turnNumber + 1;
+    handleJumpToTurn(nextTurnNumber);
   }
 
-  const boardSquares = boardSquaresHistory[boardSquaresHistory.length - 1];
+  function handleJumpToTurn(nextTurnNumber) {
+    setTurnNumber(nextTurnNumber);
+    setPlayerTurn(nextTurnNumber % players.length);
+  }
+
+  const boardSquares = boardSquaresHistory[turnNumber];
+  const turnsTakenList = boardSquaresHistory.map((boardSquares, i) => {
+    let description;
+    if (i == 0) {
+      description = "Go to game start";
+    } else {
+      description = "Go to turn #" + i;
+    }
+
+    return (
+      <li key={i}>
+        <button onClick={() => handleJumpToTurn(i)}>
+          {description}
+        </button>
+      </li>
+    );
+  });
 
   return (
     <div className="game">
       <div className="game-board">
         <Board squares={boardSquares} playerTurn={playerTurn} onPlay={handlePlay} />
+      </div>
+      <div className="game-info">
+        <ol>{turnsTakenList}</ol>
       </div>
     </div>
   );
