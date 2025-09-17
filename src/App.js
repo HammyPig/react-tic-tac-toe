@@ -21,6 +21,31 @@ function Board({ squares, turnNumber, onPlay }) {
     onPlay(nextSquares);
   }
 
+  function renderGrid() {
+    const grid = [];
+    const nRows = Math.sqrt(squares.length);
+    const nCols = nRows;
+
+    for (let r = 0; r < nRows; r++) {
+      const row = [];
+
+      for (let c = 0; c < nCols; c++) {
+        const cellId = r * nCols + c;
+        row.push(
+          <Square key={cellId} value={squares[cellId]} onSquareClick={() => handleClick(cellId)} />
+        );
+      }
+
+      grid.push(
+        <div key={r} className="board-row">
+          {row}
+        </div>
+      );
+    }
+    
+    return grid;
+  }
+
   const winner = getWinner(squares);
   const isGameOver = !squares.includes(null) || winner
   let statusMessage;
@@ -38,21 +63,7 @@ function Board({ squares, turnNumber, onPlay }) {
   return (
     <>
       <div className="status">{statusMessage}</div>
-      <div className="board-row">
-        <Square value={squares[0]} onSquareClick={() => handleClick(0)} />
-        <Square value={squares[1]} onSquareClick={() => handleClick(1)} />
-        <Square value={squares[2]} onSquareClick={() => handleClick(2)} />
-      </div>
-      <div className="board-row">
-        <Square value={squares[3]} onSquareClick={() => handleClick(3)} />
-        <Square value={squares[4]} onSquareClick={() => handleClick(4)} />
-        <Square value={squares[5]} onSquareClick={() => handleClick(5)} />
-      </div>
-      <div className="board-row">
-        <Square value={squares[6]} onSquareClick={() => handleClick(6)} />
-        <Square value={squares[7]} onSquareClick={() => handleClick(7)} />
-        <Square value={squares[8]} onSquareClick={() => handleClick(8)} />
-      </div>
+      {renderGrid()}
     </>
   );
 }
