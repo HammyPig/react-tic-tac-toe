@@ -71,12 +71,17 @@ function Board({ squares, turnNumber, onPlay }) {
 export default function Game() {
   const [boardSquaresHistory, setBoardSquaresHistory] = useState([Array(9).fill(null)]);
   const [turnNumber, setTurnNumber] = useState(0);
+  const [isTurnHistoryInAscendingOrder, setIsTurnHistoryInAscendingOrder] = useState(true);
 
   function handlePlay(nextBoardSquares) {
     setBoardSquaresHistory([...boardSquaresHistory.slice(0, turnNumber + 1), nextBoardSquares]);
 
     const nextTurnNumber = turnNumber + 1;
     setTurnNumber(nextTurnNumber);
+  }
+
+  function handleToggleTurnHistorySortOrder() {
+    setIsTurnHistoryInAscendingOrder(!isTurnHistoryInAscendingOrder);
   }
 
   const boardSquares = boardSquaresHistory[turnNumber];
@@ -114,13 +119,19 @@ export default function Game() {
     return content;
   });
 
+  const orderedTurnsTakenList = isTurnHistoryInAscendingOrder ? turnsTakenList : [...turnsTakenList].reverse();
+  const turnHistorySortButtonText = "Sort by " + (isTurnHistoryInAscendingOrder ? "ascending" : "descending");
+
   return (
     <div className="game">
       <div className="game-board">
         <Board squares={boardSquares} turnNumber={turnNumber} onPlay={handlePlay} />
       </div>
       <div className="game-info">
-        <ol>{turnsTakenList}</ol>
+        <button onClick={handleToggleTurnHistorySortOrder}>
+          {turnHistorySortButtonText}
+        </button>
+        <ol>{orderedTurnsTakenList}</ol>
       </div>
     </div>
   );
