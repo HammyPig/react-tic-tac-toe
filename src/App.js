@@ -75,13 +75,17 @@ function Board({ squares, highlightedSquares, turnNumber, onPlay }) {
 
 export default function Game() {
   const [boardSquaresHistory, setBoardSquaresHistory] = useState([Array(9).fill(null)]);
+  const [playerActionHistory, setPlayerActionHistory] = useState([]);
   const [turnNumber, setTurnNumber] = useState(0);
   const [isTurnHistoryInAscendingOrder, setIsTurnHistoryInAscendingOrder] = useState(true);
 
   function handlePlay(cellId) {
+    const player = getPlayerTurn(turnNumber);
+    setPlayerActionHistory([...playerActionHistory.slice(0, turnNumber), [player, cellId]]);
+
     const boardSquares = boardSquaresHistory[turnNumber];
     const nextBoardSquares = boardSquares.slice();
-    nextBoardSquares[cellId] = getPlayerTurn(turnNumber);
+    nextBoardSquares[cellId] = player;
     setBoardSquaresHistory([...boardSquaresHistory.slice(0, turnNumber + 1), nextBoardSquares]);
 
     const nextTurnNumber = turnNumber + 1;
@@ -107,7 +111,7 @@ export default function Game() {
     if (i == 0) {
       turnNumberAsText = "game start";
     } else {
-      turnNumberAsText = "turn #" + i;
+      turnNumberAsText = `turn #${i} (${playerActionHistory[i - 1]})`
     }
 
     const currentTurnText = (
