@@ -1,6 +1,9 @@
-function Board({ squares, highlightedSquares, turnNumber, onPlay }) {
+import * as gameUtils from "./gameUtils";
+import Square from "./Square";
+
+export default function Board({ squares, highlightedSquares, turnNumber, onPlay }) {
   function handleClick(cellId) {
-    if (squares[cellId] || getWinner(squares)) {
+    if (squares[cellId] || gameUtils.getWinner(squares)) {
       return;
     }
 
@@ -32,7 +35,7 @@ function Board({ squares, highlightedSquares, turnNumber, onPlay }) {
     return grid;
   }
 
-  const winner = getWinner(squares);
+  const winner = gameUtils.getWinner(squares);
   const isGameOver = !squares.includes(null) || winner
   let statusMessage;
 
@@ -43,7 +46,7 @@ function Board({ squares, highlightedSquares, turnNumber, onPlay }) {
       statusMessage = "It's a draw!"
     }
   } else {
-    statusMessage = "Player Turn: " + getPlayerTurn(turnNumber);
+    statusMessage = "Player Turn: " + gameUtils.getPlayerTurn(turnNumber);
   }
 
   return (

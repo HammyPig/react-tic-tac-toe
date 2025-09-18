@@ -1,11 +1,15 @@
-function Game() {
+import { useState } from "react";
+import * as gameUtils from "./gameUtils";
+import Board from "./Board";
+
+export default function Game() {
   const [boardSquaresHistory, setBoardSquaresHistory] = useState([Array(9).fill(null)]);
   const [playerActionHistory, setPlayerActionHistory] = useState([]);
   const [turnNumber, setTurnNumber] = useState(0);
   const [isTurnHistoryInAscendingOrder, setIsTurnHistoryInAscendingOrder] = useState(true);
 
   function handlePlay(cellId) {
-    const player = getPlayerTurn(turnNumber);
+    const player = gameUtils.getPlayerTurn(turnNumber);
     setPlayerActionHistory([...playerActionHistory.slice(0, turnNumber), [player, cellId]]);
 
     const boardSquares = boardSquaresHistory[turnNumber];
@@ -22,7 +26,7 @@ function Game() {
   }
 
   const boardSquares = boardSquaresHistory[turnNumber];
-  const winningLine = getWinningLine(boardSquares);
+  const winningLine = gameUtils.getWinningLine(boardSquares);
   const highlightedSquares = Array(9).fill(false);
 
   if (winningLine) {

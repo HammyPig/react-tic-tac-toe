@@ -1,4 +1,4 @@
-function Square({ value, onSquareClick, isHighlighted }) {
+export default function Square({ value, onSquareClick, isHighlighted }) {
   let highlightedStyle;
   if (isHighlighted) {
     highlightedStyle = {"backgroundColor": "yellow"};

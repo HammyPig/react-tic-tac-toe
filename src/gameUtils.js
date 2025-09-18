@@ -1,10 +1,10 @@
 const players = ["X", "O"];
 
-function getPlayerTurn(turnNumber) {
+export function getPlayerTurn(turnNumber) {
   return players[turnNumber % players.length];
 }
 
-function getWinningLine(squares) {
+export function getWinningLine(squares) {
   const winningLines = [
     [0, 1, 2],
     [3, 4, 5],
@@ -27,7 +27,7 @@ function getWinningLine(squares) {
   return null;
 }
 
-function getWinner(squares) {
+export function getWinner(squares) {
   const winningLine = getWinningLine(squares);
   const winner = winningLine ? squares[winningLine[0]] : null;
   return winner;
