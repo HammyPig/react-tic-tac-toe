@@ -148,7 +148,7 @@ function getPlayerTurn(turnNumber) {
   return players[turnNumber % players.length];
 }
 
-function getWinner(squares) {
+function getWinningLine(squares) {
   const winningLines = [
     [0, 1, 2],
     [3, 4, 5],
@@ -164,9 +164,15 @@ function getWinner(squares) {
     const [a, b, c] = winningLines[i];
 
     if (squares[a] && squares[a] === squares[b] && squares[a] == squares[c]) {
-      return squares[a];
+      return winningLines[i];
     }
   }
 
   return null;
+}
+
+function getWinner(squares) {
+  const winningLine = getWinningLine(squares);
+  const winner = winningLine ? squares[winningLine[0]] : null;
+  return winner;
 }
