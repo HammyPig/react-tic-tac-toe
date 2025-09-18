@@ -18,14 +18,12 @@ function Square({ value, onSquareClick, isHighlighted }) {
 }
 
 function Board({ squares, highlightedSquares, turnNumber, onPlay }) {
-  function handleClick(i) {
-    if (squares[i] || getWinner(squares)) {
+  function handleClick(cellId) {
+    if (squares[cellId] || getWinner(squares)) {
       return;
     }
 
-    const nextSquares = squares.slice();
-    nextSquares[i] = getPlayerTurn(turnNumber);
-    onPlay(nextSquares);
+    onPlay(cellId);
   }
 
   function renderGrid() {
@@ -80,7 +78,10 @@ export default function Game() {
   const [turnNumber, setTurnNumber] = useState(0);
   const [isTurnHistoryInAscendingOrder, setIsTurnHistoryInAscendingOrder] = useState(true);
 
-  function handlePlay(nextBoardSquares) {
+  function handlePlay(cellId) {
+    const boardSquares = boardSquaresHistory[turnNumber];
+    const nextBoardSquares = boardSquares.slice();
+    nextBoardSquares[cellId] = getPlayerTurn(turnNumber);
     setBoardSquaresHistory([...boardSquaresHistory.slice(0, turnNumber + 1), nextBoardSquares]);
 
     const nextTurnNumber = turnNumber + 1;
