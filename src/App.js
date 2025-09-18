@@ -148,15 +148,19 @@ function Game() {
   const turnHistorySortButtonText = "Sort by " + (isTurnHistoryInAscendingOrder ? "ascending" : "descending");
 
   return (
-    <div className="game">
-      <div className="game-board">
-        <Board squares={boardSquares} highlightedSquares={highlightedSquares} turnNumber={turnNumber} onPlay={handlePlay} />
+    <div className="block game" style={{"flexDirection": "row"}}>
+      <div className="block">
+        <div className="game-board">
+          <Board squares={boardSquares} highlightedSquares={highlightedSquares} turnNumber={turnNumber} onPlay={handlePlay} />
+        </div>
       </div>
-      <div className="game-info">
-        <button onClick={handleToggleTurnHistorySortOrder}>
-          {turnHistorySortButtonText}
-        </button>
-        <ol>{orderedTurnsTakenList}</ol>
+      <div className="block">
+        <div className="game-info">
+          <button onClick={handleToggleTurnHistorySortOrder}>
+            {turnHistorySortButtonText}
+          </button>
+          <ol>{orderedTurnsTakenList}</ol>
+        </div>
       </div>
     </div>
   );
