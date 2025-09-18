@@ -2,9 +2,16 @@ import { useState } from "react";
 
 const players = ["X", "O"];
 
-function Square({ value, onSquareClick }) {
+function Square({ value, onSquareClick, isHighlighted }) {
+  let highlightedStyle;
+  if (isHighlighted) {
+    highlightedStyle = {"backgroundColor": "yellow"};
+  } else {
+    highlightedStyle = {};
+  }
+
   return (
-    <button className="square" onClick={onSquareClick}>
+    <button className="square" style={highlightedStyle} onClick={onSquareClick}>
       {value}
     </button>
   );
