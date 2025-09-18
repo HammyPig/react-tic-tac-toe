@@ -92,6 +92,16 @@ body {
   text-align: center;
   width: 33%;
   aspect-ratio: 1;
+  position: relative;
+}
+
+.cell-id {
+  position: absolute;
+  top: 0.5%;
+  left: 2%;
+  font-size: 5cqw;
+  line-height: 1;
+  color: gray;
 }
 
 .board-row:after {

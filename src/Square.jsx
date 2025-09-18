@@ -1,4 +1,4 @@
-export default function Square({ value, onSquareClick, isHighlighted }) {
+export default function Square({ id, value, onSquareClick, isHighlighted }) {
   let highlightedStyle;
   if (isHighlighted) {
     highlightedStyle = {"backgroundColor": "yellow"};
@@ -8,6 +8,9 @@ export default function Square({ value, onSquareClick, isHighlighted }) {
 
   return (
     <button className="square" style={highlightedStyle} onClick={onSquareClick}>
+      <span className="cell-id">
+        {id}
+      </span>
       {value}
     </button>
   );
