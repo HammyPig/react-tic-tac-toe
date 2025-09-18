@@ -105,7 +105,7 @@ export default function Game() {
       highlightedSquares[winningLine[i]] = true;
     }
   } else {
-    if (playerActionHistory.length > 0) {
+    if (turnNumber > 0) {
       highlightedSquares[playerActionHistory[turnNumber - 1][1]] = true;
     }
   }
