@@ -17,7 +17,7 @@ function Square({ value, onSquareClick, isHighlighted }) {
   );
 }
 
-function Board({ squares, turnNumber, onPlay }) {
+function Board({ squares, highlightedSquares, turnNumber, onPlay }) {
   function handleClick(i) {
     if (squares[i] || getWinner(squares)) {
       return;
@@ -39,7 +39,7 @@ function Board({ squares, turnNumber, onPlay }) {
       for (let c = 0; c < nCols; c++) {
         const cellId = r * nCols + c;
         row.push(
-          <Square key={cellId} value={squares[cellId]} onSquareClick={() => handleClick(cellId)} />
+          <Square key={cellId} value={squares[cellId]} isHighlighted={highlightedSquares[cellId]} onSquareClick={() => handleClick(cellId)} />
         );
       }
 
@@ -92,6 +92,15 @@ export default function Game() {
   }
 
   const boardSquares = boardSquaresHistory[turnNumber];
+  const winningLine = getWinningLine(boardSquares);
+  const highlightedSquares = Array(9).fill(false);
+
+  if (winningLine) {
+    for (let i = 0; i < winningLine.length; i++) {
+      highlightedSquares[winningLine[i]] = true;
+    }
+  }
+
   const turnsTakenList = boardSquaresHistory.map((boardSquares, i) => {
     let turnNumberAsText;
     if (i == 0) {
@@ -132,7 +141,7 @@ export default function Game() {
   return (
     <div className="game">
       <div className="game-board">
-        <Board squares={boardSquares} turnNumber={turnNumber} onPlay={handlePlay} />
+        <Board squares={boardSquares} highlightedSquares={highlightedSquares} turnNumber={turnNumber} onPlay={handlePlay} />
       </div>
       <div className="game-info">
         <button onClick={handleToggleTurnHistorySortOrder}>
