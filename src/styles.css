@@ -95,7 +95,7 @@ body {
   position: relative;
 }
 
-.cell-id {
+.square-display-number {
   position: absolute;
   top: 0.5%;
   left: 2%;

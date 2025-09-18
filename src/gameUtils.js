@@ -32,3 +32,7 @@ export function getWinner(squares) {
   const winner = winningLine ? squares[winningLine[0]] : null;
   return winner;
 }
+
+export function getCellDisplayNumber(cellId) {
+    return cellId + 1;
+}

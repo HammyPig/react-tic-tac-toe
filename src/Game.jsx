@@ -44,7 +44,9 @@ export default function Game() {
     if (i == 0) {
       turnNumberAsText = "game start";
     } else {
-      turnNumberAsText = `turn #${i} (${playerActionHistory[i - 1]})`
+      const [player, cellId] = playerActionHistory[i - 1];
+      const cellDisplayNumber = gameUtils.getCellDisplayNumber(cellId);
+      turnNumberAsText = `turn #${i} (${player}, ${cellDisplayNumber})`
     }
 
     const currentTurnText = (

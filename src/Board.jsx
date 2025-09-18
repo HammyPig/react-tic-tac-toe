@@ -21,7 +21,7 @@ export default function Board({ squares, highlightedSquares, turnNumber, onPlay 
       for (let c = 0; c < nCols; c++) {
         const cellId = r * nCols + c;
         row.push(
-          <Square key={cellId} id={cellId} value={squares[cellId]} isHighlighted={highlightedSquares[cellId]} onSquareClick={() => handleClick(cellId)} />
+          <Square key={cellId} displayNumber={gameUtils.getCellDisplayNumber(cellId)} value={squares[cellId]} isHighlighted={highlightedSquares[cellId]} onSquareClick={() => handleClick(cellId)} />
         );
       }
 
