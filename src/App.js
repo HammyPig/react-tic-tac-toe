@@ -73,7 +73,7 @@ function Board({ squares, highlightedSquares, turnNumber, onPlay }) {
   );
 }
 
-export default function Game() {
+function Game() {
   const [boardSquaresHistory, setBoardSquaresHistory] = useState([Array(9).fill(null)]);
   const [playerActionHistory, setPlayerActionHistory] = useState([]);
   const [turnNumber, setTurnNumber] = useState(0);
@@ -160,6 +160,16 @@ export default function Game() {
       </div>
     </div>
   );
+}
+
+export default function App() {
+  return (
+    <section className="section">
+      <div className="container">
+        <Game />
+      </div>
+    </section>
+  )
 }
 
 function getPlayerTurn(turnNumber) {
