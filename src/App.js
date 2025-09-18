@@ -104,6 +104,10 @@ export default function Game() {
     for (let i = 0; i < winningLine.length; i++) {
       highlightedSquares[winningLine[i]] = true;
     }
+  } else {
+    if (playerActionHistory.length > 0) {
+      highlightedSquares[playerActionHistory[turnNumber - 1][1]] = true;
+    }
   }
 
   const turnsTakenList = boardSquaresHistory.map((boardSquares, i) => {
