@@ -1,7 +1,7 @@
 export default function Square({ displayNumber, value, onSquareClick, isHighlighted }) {
   let highlightedStyle;
   if (isHighlighted) {
-    highlightedStyle = {"backgroundColor": "yellow"};
+    highlightedStyle = {"backgroundColor": "#f5f580"};
   } else {
     highlightedStyle = {};
   }
@@ -11,7 +11,9 @@ export default function Square({ displayNumber, value, onSquareClick, isHighligh
       <span className="square-display-number">
         {displayNumber}
       </span>
-      {value}
+      <span className="square-value">
+        {value}
+      </span>
     </button>
   );
 }

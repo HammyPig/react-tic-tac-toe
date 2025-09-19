@@ -75,13 +75,17 @@ body {
   gap: 10px;
 }
 
-.board-row {
+.game-board {
   container-type: inline-size;
 }
 
+.game-border {
+  border: 1cqw solid #ebecd0;
+}
+
 .square {
-  background: #fff;
-  border: 1px solid #999;
+  background-color: #739552;
+  border: 1cqw solid #ebecd0;
   float: left;
   font-size: 30cqw;
   font-weight: bold;
@@ -99,7 +103,13 @@ body {
   left: 2%;
   font-size: 5cqw;
   line-height: 1;
-  color: gray;
+  color: #ebecd0;
+}
+
+.square-value {
+  color: #f9f9f9;
+  -webkit-text-stroke: 1.5cqw black;
+  paint-order: stroke fill;
 }
 
 .board-row:after {
