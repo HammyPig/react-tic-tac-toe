@@ -35,24 +35,5 @@ export default function Board({ squares, highlightedSquares, turnNumber, onPlay 
     return grid;
   }
 
-  const winner = gameUtils.getWinner(squares);
-  const isGameOver = !squares.includes(null) || winner
-  let statusMessage;
-
-  if (isGameOver) {
-    if (winner) {
-      statusMessage = "Player " + winner + " wins!";
-    } else {
-      statusMessage = "It's a draw!"
-    }
-  } else {
-    statusMessage = "Player Turn: " + gameUtils.getPlayerTurn(turnNumber);
-  }
-
-  return (
-    <>
-      <div className="status">{statusMessage}</div>
-      {renderGrid()}
-    </>
-  );
+  return renderGrid();
 }
