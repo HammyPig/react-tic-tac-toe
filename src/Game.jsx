@@ -10,7 +10,7 @@ export default function Game() {
 
   function handlePlay(cellId) {
     const player = gameUtils.getPlayerTurn(turnNumber);
-    setPlayerActionHistory([...playerActionHistory.slice(0, turnNumber), [player, cellId]]);
+    setPlayerActionHistory([...playerActionHistory.slice(0, turnNumber), cellId]);
 
     const boardSquares = boardSquaresHistory[turnNumber];
     const nextBoardSquares = boardSquares.slice();
@@ -35,7 +35,7 @@ export default function Game() {
     }
   } else {
     if (turnNumber > 0) {
-      highlightedSquares[playerActionHistory[turnNumber - 1][1]] = true;
+      highlightedSquares[playerActionHistory[turnNumber - 1]] = true;
     }
   }
 
@@ -44,7 +44,8 @@ export default function Game() {
     if (i == 0) {
       turnNumberAsText = "game start";
     } else {
-      const [player, cellId] = playerActionHistory[i - 1];
+      const player = gameUtils.getPlayerTurn(turnNumber);
+      const cellId = playerActionHistory[i - 1];
       const cellDisplayNumber = gameUtils.getCellDisplayNumber(cellId);
       turnNumberAsText = `turn #${i} (${player}, ${cellDisplayNumber})`
     }
