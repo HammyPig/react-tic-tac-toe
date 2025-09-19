@@ -95,10 +95,10 @@ export default function Game() {
   return (
     <div className="block game" style={{"flexDirection": "row"}}>
       <div className="block">
-        <div className="status">{statusMessage}</div>
         <div className="game-board">
           <Board squares={boardSquares} highlightedSquares={highlightedSquares} turnNumber={turnNumber} onPlay={handlePlay} />
         </div>
+        <div className="status">{statusMessage}</div>
       </div>
       <div className="block">
         <div className="game-info">
