@@ -86,11 +86,9 @@ body {
   font-size: 30cqw;
   font-weight: bold;
   line-height: 34px;
-  margin-right: -1px;
-  margin-top: -1px;
   padding: 0;
   text-align: center;
-  width: 33%;
+  width: calc(100% / 3);
   aspect-ratio: 1;
   position: relative;
 }
