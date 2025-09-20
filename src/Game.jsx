@@ -1,6 +1,7 @@
 import { useState } from "react";
 import * as gameUtils from "./gameUtils";
 import Board from "./Board";
+import TurnNavigation from "./TurnNavigation";
 
 export default function Game() {
   const [boardSquaresHistory, setBoardSquaresHistory] = useState([Array(9).fill(null)]);
@@ -34,77 +35,6 @@ export default function Game() {
     }
   }
 
-  const playersHeaderRow = gameUtils.players.map((player, i) => {
-    return (
-      <div className="block" style={{maxWidth: "100px"}}>
-          <div>
-            <span className="turn-history-header-text" >
-              {player}
-            </span>
-        </div>
-      </div>
-    );
-  });
-
-  playersHeaderRow.splice(0, 0, (
-    <div className="block" style={{maxWidth: "200px"}}>
-      <div>
-        <span className="turn-history-header-text">
-          Turn
-        </span>        
-      </div>
-    </div>
-  ));
-
-  const turnsTakenList = [];
-
-  turnsTakenList.push(
-    <div className="block turn-history-row" style={{"flexDirection": "row"}}>
-      {playersHeaderRow}
-    </div>
-  )
-
-  for (let i = 0; i < playerActionHistory.length; i += gameUtils.players.length) {
-    const playerActionsDuringTurn = playerActionHistory.slice(i, i + gameUtils.players.length);
-
-    const playerActionsDuringTurnButtons = playerActionsDuringTurn.map((playerAction, j) => {
-      const iteratedTurnNumber = i + j + 1;
-
-      let className;
-      if (turnNumber == iteratedTurnNumber) {
-        className = "turn-history-btn turn-history-btn-highlighted";
-      } else {
-        className = "turn-history-btn";
-      }
-
-      return (
-        <div className="block" style={{maxWidth: "100px"}}>
-          <div>
-            <button className={className} onClick={() => setTurnNumber(iteratedTurnNumber)}>
-              {gameUtils.getCellDisplayNumber(playerAction)}
-            </button>
-          </div>
-        </div>
-      );
-    });
-
-    playerActionsDuringTurnButtons.splice(0, 0, (
-      <div className="block" style={{maxWidth: "200px"}}>
-        <div>
-          <span className="turn-history-header-text">
-            {i / gameUtils.players.length + 1}.
-          </span>
-        </div>
-      </div>
-    ));
-
-    turnsTakenList.push(
-      <div className="block turn-history-row" style={{"flexDirection": "row"}}>
-        {playerActionsDuringTurnButtons}
-      </div>
-    );
-  }
-
   const winner = gameUtils.getWinner(boardSquares);
   const isGameOver = !boardSquares.includes(null) || winner
 
@@ -130,9 +60,7 @@ export default function Game() {
         <div className="status">{statusMessage}</div>
       </div>
       <div className="block">
-        <div className="turn-history">
-          {turnsTakenList}
-        </div>
+        <TurnNavigation playerActionHistory={playerActionHistory} turnNumber={turnNumber} setTurnNumber={setTurnNumber} />
       </div>
     </div>
   );
