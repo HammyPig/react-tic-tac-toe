@@ -162,6 +162,33 @@ body {
   border-bottom: 3px solid #f2e65a;
 }
 
+.turn-navigation-controls {
+  background-color: #f1f1f1;
+  padding: 10px;
+  border-radius: 0px 0px 10px 10px;
+}
+
+.turn-navigation-controls-btn, .turn-navigation-controls-btn-disabled {
+  all: unset;
+  border-radius: 8px;
+  display: inline-flex;
+  justify-content: center;
+  padding: 8px 0px;
+  width: 100%;
+  background-color: #dad8d6;
+  transition: background-color ease 0.2s;
+  box-shadow: inset 0 -2px 0 rgba(0, 0, 0, 0.1);
+}
+
+.turn-navigation-controls-btn:hover {
+  width: 100%;
+  background-color: #f1f1f1;
+}
+
+.turn-navigation-controls-btn-disabled {
+  opacity: 0.25;
+}
+
 @media (max-width: 767px) {
   .container {
     flex-wrap: wrap;

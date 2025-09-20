@@ -21,6 +21,12 @@ export default function Game() {
     setTurnNumber(nextTurnNumber);
   }
 
+  function handleGameReset() {
+    setBoardSquaresHistory([Array(9).fill(null)]);
+    setPlayerActionHistory([]);
+    setTurnNumber(0);
+  }
+
   const boardSquares = boardSquaresHistory[turnNumber];
   const winningLine = gameUtils.getWinningLine(boardSquares);
   const highlightedSquares = Array(9).fill(false);
@@ -60,7 +66,7 @@ export default function Game() {
         <div className="status">{statusMessage}</div>
       </div>
       <div className="block">
-        <TurnNavigation playerActionHistory={playerActionHistory} turnNumber={turnNumber} setTurnNumber={setTurnNumber} />
+        <TurnNavigation playerActionHistory={playerActionHistory} turnNumber={turnNumber} setTurnNumber={setTurnNumber} onGameReset={handleGameReset} />
       </div>
     </div>
   );

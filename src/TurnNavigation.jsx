@@ -1,6 +1,9 @@
+import { ArrowLeft } from "lucide-react";
+import { ArrowRight } from "lucide-react";
+import { RotateCcw } from "lucide-react";
 import * as gameUtils from "./gameUtils";
 
-export default function TurnNavigation({ playerActionHistory, turnNumber, setTurnNumber }) {
+export default function TurnNavigation({ playerActionHistory, turnNumber, setTurnNumber, onGameReset }) {
   const playersHeaderRow = gameUtils.players.map((player, i) => {
     return (
       <div className="block" style={{maxWidth: "100px"}}>
@@ -73,8 +76,20 @@ export default function TurnNavigation({ playerActionHistory, turnNumber, setTur
   }
 
   return (
-    <div className="turn-history">
+    <div className="turn-navigation">
       {turnsTakenList}
+      <div className="block turn-navigation-controls" style={{flexDirection: "row", paddingTop: "10px"}}>
+        <button className={turnNumber === 0 ? "turn-navigation-controls-btn-disabled" : "turn-navigation-controls-btn"} onClick={() => setTurnNumber(turnNumber - 1)} disabled={turnNumber === 0}>
+          <ArrowLeft color="#666564" size={40} strokeWidth={3} />
+        </button>
+        <button className={turnNumber === playerActionHistory.length ? "turn-navigation-controls-btn-disabled" : "turn-navigation-controls-btn"} onClick={() => setTurnNumber(turnNumber + 1)} disabled={turnNumber === playerActionHistory.length}>
+          <ArrowRight color="#666564" size={40} strokeWidth={3} />
+        </button>
+        <button className={playerActionHistory.length === 0 ? "turn-navigation-controls-btn-disabled" : "turn-navigation-controls-btn"} onClick={onGameReset} disabled={playerActionHistory.length === 0}>
+          <RotateCcw color="#666564" size={40} strokeWidth={3} />
+        </button>
+      </div>
+
     </div>
   );
 }
