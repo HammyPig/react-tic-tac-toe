@@ -29,7 +29,7 @@ export default function TurnNavigation({ playerActionHistory, turnNumber, setTur
   const turnsTakenList = [];
 
   turnsTakenList.push(
-    <div className="block turn-history-row" style={{"flexDirection": "row"}}>
+    <div className="block turn-history-row" style={{"flexDirection": "row", backgroundColor: "#dad8d6", borderRadius: "10px 10px 0px 0px"}}>
       {playersHeaderRow}
     </div>
   )
