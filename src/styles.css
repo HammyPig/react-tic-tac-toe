@@ -82,6 +82,7 @@ body {
 
 .game-border {
   border: 1cqw solid #ebecd0;
+  border-radius: 10px;
 }
 
 .square {
