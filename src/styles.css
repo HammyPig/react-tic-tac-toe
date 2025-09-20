@@ -122,8 +122,41 @@ body {
   margin-bottom: 10px;
 }
 
-.game-info {
-  margin-left: 20px;
+.turn-history-row {
+  padding: 10px;
+}
+
+.turn-history-row:nth-child(even) {
+  background-color: #fff;
+}
+
+.turn-history-row:nth-child(odd) {
+  background-color: #f8f8f8;
+}
+
+.turn-history-btn {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.turn-history-header-text {
+  display: inline-block;
+}
+
+.turn-history-header-text, .turn-history-btn {
+  font-size: 20px;
+  font-weight: bold;
+  text-align: left;
+  padding: 5px 10px 5px 10px;
+  border-top: 3px solid transparent;
+  border-bottom: 3px solid transparent;
+  border-radius: 3px;
+}
+
+.turn-history-btn-highlighted {
+  background-color: #fff35f;
+  border-bottom: 3px solid #f2e65a;
 }
 
 @media (max-width: 767px) {

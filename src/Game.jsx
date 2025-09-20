@@ -34,42 +34,56 @@ export default function Game() {
     }
   }
 
-  const turnsTakenList = boardSquaresHistory.map((boardSquares, i) => {
-    let turnNumberAsText;
-    if (i == 0) {
-      turnNumberAsText = "game start";
-    } else {
-      const player = gameUtils.getPlayerTurn(turnNumber);
-      const cellId = playerActionHistory[i - 1];
-      const cellDisplayNumber = gameUtils.getCellDisplayNumber(cellId);
-      turnNumberAsText = `turn #${i} (${player}, ${cellDisplayNumber})`
-    }
-
-    const currentTurnText = (
-      <li key={i}>
-        <p>
-          {"You are at " + turnNumberAsText}
-        </p>
-      </li>
+  const playersHeaderRow = gameUtils.players.map((player, i) => {
+    return (
+      <div className="block" style={{maxWidth: "100px"}}>
+          <div>
+            <span className="turn-history-header-text" >
+              {player}
+            </span>
+        </div>
+      </div>
     );
-
-    const goToTurnButton = (
-      <li key={i}>
-        <button onClick={() => setTurnNumber(i)}>
-          {"Go to " + turnNumberAsText}
-        </button>
-      </li>
-    );
-
-    let content;
-    if (turnNumber == i) {
-      content = currentTurnText;
-    } else {
-      content = goToTurnButton;
-    }
-
-    return content;
   });
+
+  const turnsTakenList = [];
+
+  turnsTakenList.push(
+    <div className="block turn-history-row" style={{"flexDirection": "row"}}>
+      {playersHeaderRow}
+    </div>
+  )
+
+  for (let i = 0; i < playerActionHistory.length; i += gameUtils.players.length) {
+    const playerActionsDuringTurn = playerActionHistory.slice(i, i + gameUtils.players.length);
+
+    const playerActionsDuringTurnButtons = playerActionsDuringTurn.map((playerAction, j) => {
+      const iteratedTurnNumber = i + j + 1;
+
+      let className;
+      if (turnNumber == iteratedTurnNumber) {
+        className = "turn-history-btn turn-history-btn-highlighted";
+      } else {
+        className = "turn-history-btn";
+      }
+
+      return (
+        <div className="block" style={{maxWidth: "100px"}}>
+          <div>
+            <button className={className} onClick={() => setTurnNumber(iteratedTurnNumber)}>
+              {gameUtils.getCellDisplayNumber(playerAction)}
+            </button>
+          </div>
+        </div>
+      );
+    });
+
+    turnsTakenList.push(
+      <div className="block turn-history-row" style={{"flexDirection": "row"}}>
+        {playerActionsDuringTurnButtons}
+      </div>
+    );
+  }
 
   const winner = gameUtils.getWinner(boardSquares);
   const isGameOver = !boardSquares.includes(null) || winner
@@ -96,8 +110,8 @@ export default function Game() {
         <div className="status">{statusMessage}</div>
       </div>
       <div className="block">
-        <div className="game-info">
-          <ol>{turnsTakenList}</ol>
+        <div className="turn-history">
+          {turnsTakenList}
         </div>
       </div>
     </div>

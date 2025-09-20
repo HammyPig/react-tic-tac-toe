@@ -1,4 +1,4 @@
-const players = ["X", "O"];
+export const players = ["X", "O"];
 
 export function getPlayerTurn(turnNumber) {
   return players[turnNumber % players.length];
