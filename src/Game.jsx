@@ -6,7 +6,6 @@ export default function Game() {
   const [boardSquaresHistory, setBoardSquaresHistory] = useState([Array(9).fill(null)]);
   const [playerActionHistory, setPlayerActionHistory] = useState([]);
   const [turnNumber, setTurnNumber] = useState(0);
-  const [isTurnHistoryInAscendingOrder, setIsTurnHistoryInAscendingOrder] = useState(true);
 
   function handlePlay(cellId) {
     const player = gameUtils.getPlayerTurn(turnNumber);
@@ -19,10 +18,6 @@ export default function Game() {
 
     const nextTurnNumber = turnNumber + 1;
     setTurnNumber(nextTurnNumber);
-  }
-
-  function handleToggleTurnHistorySortOrder() {
-    setIsTurnHistoryInAscendingOrder(!isTurnHistoryInAscendingOrder);
   }
 
   const boardSquares = boardSquaresHistory[turnNumber];
@@ -90,9 +85,6 @@ export default function Game() {
     statusMessage = "Player Turn: " + gameUtils.getPlayerTurn(turnNumber);
   }
 
-  const orderedTurnsTakenList = isTurnHistoryInAscendingOrder ? turnsTakenList : [...turnsTakenList].reverse();
-  const turnHistorySortButtonText = "Sort by " + (isTurnHistoryInAscendingOrder ? "ascending" : "descending");
-
   return (
     <div className="block game" style={{"flexDirection": "row"}}>
       <div className="block">
@@ -105,10 +97,7 @@ export default function Game() {
       </div>
       <div className="block">
         <div className="game-info">
-          <button onClick={handleToggleTurnHistorySortOrder}>
-            {turnHistorySortButtonText}
-          </button>
-          <ol>{orderedTurnsTakenList}</ol>
+          <ol>{turnsTakenList}</ol>
         </div>
       </div>
     </div>
