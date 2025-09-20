@@ -135,12 +135,14 @@ body {
 }
 
 .turn-history-btn {
+  all: unset;
   background-color: transparent;
   border: none;
   cursor: pointer;
 }
 
 .turn-history-header-text {
+  all: unset;
   display: inline-block;
 }
 

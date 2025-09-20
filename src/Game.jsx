@@ -46,6 +46,16 @@ export default function Game() {
     );
   });
 
+  playersHeaderRow.splice(0, 0, (
+    <div className="block" style={{maxWidth: "200px"}}>
+      <div>
+        <span className="turn-history-header-text">
+          Turn
+        </span>        
+      </div>
+    </div>
+  ));
+
   const turnsTakenList = [];
 
   turnsTakenList.push(
@@ -77,6 +87,16 @@ export default function Game() {
         </div>
       );
     });
+
+    playerActionsDuringTurnButtons.splice(0, 0, (
+      <div className="block" style={{maxWidth: "200px"}}>
+        <div>
+          <span className="turn-history-header-text">
+            {i / gameUtils.players.length + 1}.
+          </span>
+        </div>
+      </div>
+    ));
 
     turnsTakenList.push(
       <div className="block turn-history-row" style={{"flexDirection": "row"}}>
