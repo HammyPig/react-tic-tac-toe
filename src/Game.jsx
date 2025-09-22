@@ -44,10 +44,21 @@ export default function Game() {
   return (
     <div className="block game">
       <div className="block">
-        <Board squares={boardSquares} highlightedSquares={highlightedSquares} turnNumber={turnNumber} onPlay={handlePlay} />
+        <Board
+          squares={boardSquares}
+          highlightedSquares={highlightedSquares}
+          turnNumber={turnNumber}
+          onPlay={handlePlay}
+        />
       </div>
       <div className="block">
-        <TurnNavigation boardSquaresHistory={boardSquaresHistory} playerActionHistory={playerActionHistory} turnNumber={turnNumber} setTurnNumber={setTurnNumber} onGameReset={handleGameReset} />
+        <TurnNavigation
+          boardSquaresHistory={boardSquaresHistory}
+          playerActionHistory={playerActionHistory}
+          turnNumber={turnNumber}
+          setTurnNumber={setTurnNumber}
+          onGameReset={handleGameReset}
+        />
       </div>
     </div>
   );
