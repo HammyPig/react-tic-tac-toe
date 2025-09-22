@@ -41,25 +41,10 @@ export default function Game() {
     }
   }
 
-  const winner = gameUtils.getWinner(boardSquares);
-  const isGameOver = !boardSquares.includes(null) || winner
-
-  let statusMessage;
-  if (isGameOver) {
-    if (winner) {
-      statusMessage = "Player " + winner + " wins!";
-    } else {
-      statusMessage = "It's a draw!"
-    }
-  } else {
-    statusMessage = "Player Turn: " + gameUtils.getPlayerTurn(turnNumber);
-  }
-
   return (
     <div className="block game" style={{"flexDirection": "row"}}>
       <div className="block">
         <Board squares={boardSquares} highlightedSquares={highlightedSquares} turnNumber={turnNumber} onPlay={handlePlay} />
-        <div className="status">{statusMessage}</div>
       </div>
       <div className="block">
         <TurnNavigation boardSquaresHistory={boardSquaresHistory} playerActionHistory={playerActionHistory} turnNumber={turnNumber} setTurnNumber={setTurnNumber} onGameReset={handleGameReset} />
