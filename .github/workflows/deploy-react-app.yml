@@ -1,0 +1,51 @@
+name: Deploy React App to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set homepage field in package.json to GitHub Pages url
+        run: |
+          # Derive GitHub Pages url from repository name and owner
+          # Create unique temp copy of package.json with homepage field set to GitHub Pages url
+          # Replace original package.json with updated temp
+          REPO_OWNER="${GITHUB_REPOSITORY%%/*}"
+          REPO_NAME="${GITHUB_REPOSITORY#*/}"
+          GH_PAGES_URL="https://${REPO_OWNER}.github.io/${REPO_NAME}/"
+          TMP=$(mktemp)
+          jq --arg ghPagesUrl "$GH_PAGES_URL" '.homepage = $ghPagesUrl' package.json > "$TMP"
+          mv "$TMP" package.json
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+
+      - name: Install npm dependencies
+        run: npm install
+
+      - name: Build React App
+        run: npm run build
+
+      - name: Upload artifact of build
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./build
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
+    permissions:
+      pages: write
+      id-token: write
+
+    steps:
+      - name: Deploy artifact to GitHub Pages
+        uses: actions/deploy-pages@v4
