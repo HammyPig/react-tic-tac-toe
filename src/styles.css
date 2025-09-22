@@ -28,6 +28,10 @@ body {
   gap: 10px;
 }
 
+.game {
+  flex-direction: row;
+}
+
 .game-board {
   container-type: inline-size;
 }
@@ -47,6 +51,10 @@ body {
   width: calc(100% / 3);
   aspect-ratio: 1;
   position: relative;
+}
+
+.square-highlighted {
+  background-color: #f5f580;
 }
 
 .square-display-number {
@@ -69,8 +77,14 @@ body {
   display: table;
 }
 
-.turn-history-row {
+.turn-history-row, .turn-history-header-row {
   padding: 10px;
+  flex-direction: row;
+}
+
+.turn-history-header-row {
+  background-color: #dad8d6;
+  border-radius: 10px 10px 0px 0px;
 }
 
 .turn-history-row:nth-child(even) {
@@ -108,6 +122,7 @@ body {
   background-color: #f1f1f1;
   padding: 10px;
   border-radius: 0px 0px 10px 10px;
+  flex-direction: row;
 }
 
 .turn-navigation-controls-btn, .turn-navigation-controls-btn-disabled {

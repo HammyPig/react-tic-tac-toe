@@ -42,7 +42,7 @@ export default function Game() {
   }
 
   return (
-    <div className="block game" style={{"flexDirection": "row"}}>
+    <div className="block game">
       <div className="block">
         <Board squares={boardSquares} highlightedSquares={highlightedSquares} turnNumber={turnNumber} onPlay={handlePlay} />
       </div>

@@ -30,7 +30,7 @@ export default function TurnNavigation({ boardSquaresHistory, playerActionHistor
   const turnsTakenList = [];
 
   turnsTakenList.push(
-    <div className="block turn-history-row" style={{"flexDirection": "row", backgroundColor: "#dad8d6", borderRadius: "10px 10px 0px 0px"}}>
+    <div className="block turn-history-header-row">
       {playersHeaderRow}
     </div>
   )
@@ -71,7 +71,7 @@ export default function TurnNavigation({ boardSquaresHistory, playerActionHistor
     ));
 
     turnsTakenList.push(
-      <div className="block turn-history-row" style={{"flexDirection": "row"}}>
+      <div className="block turn-history-row">
         {playerActionsDuringTurnButtons}
       </div>
     );
@@ -80,7 +80,7 @@ export default function TurnNavigation({ boardSquaresHistory, playerActionHistor
   return (
     <div className="turn-navigation">
       {turnsTakenList}
-      <div className="block turn-navigation-controls" style={{flexDirection: "row", paddingTop: "10px"}}>
+      <div className="block turn-navigation-controls">
         <button className={turnNumber === 0 ? "turn-navigation-controls-btn-disabled" : "turn-navigation-controls-btn"} onClick={() => setTurnNumber(turnNumber - 1)} disabled={turnNumber === 0}>
           <ArrowLeft color="#666564" size={40} strokeWidth={3} />
         </button>
