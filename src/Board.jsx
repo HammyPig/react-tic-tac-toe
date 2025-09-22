@@ -35,5 +35,11 @@ export default function Board({ squares, highlightedSquares, turnNumber, onPlay 
     return grid;
   }
 
-  return renderGrid();
+  return (
+    <div className="game-board">
+      <div className="game-border">
+        {renderGrid()}
+      </div>
+    </div>
+  )
 }
