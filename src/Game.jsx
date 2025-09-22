@@ -62,7 +62,7 @@ export default function Game() {
         <div className="status">{statusMessage}</div>
       </div>
       <div className="block">
-        <TurnNavigation playerActionHistory={playerActionHistory} turnNumber={turnNumber} setTurnNumber={setTurnNumber} onGameReset={handleGameReset} />
+        <TurnNavigation boardSquaresHistory={boardSquaresHistory} playerActionHistory={playerActionHistory} turnNumber={turnNumber} setTurnNumber={setTurnNumber} onGameReset={handleGameReset} />
       </div>
     </div>
   );

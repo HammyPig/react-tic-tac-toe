@@ -1,9 +1,10 @@
 import { ArrowLeft } from "lucide-react";
 import { ArrowRight } from "lucide-react";
 import { RotateCcw } from "lucide-react";
+import { Trophy } from "lucide-react";
 import * as gameUtils from "./gameUtils";
 
-export default function TurnNavigation({ playerActionHistory, turnNumber, setTurnNumber, onGameReset }) {
+export default function TurnNavigation({ boardSquaresHistory, playerActionHistory, turnNumber, setTurnNumber, onGameReset }) {
   const playersHeaderRow = gameUtils.players.map((player, i) => {
     return (
       <div className="block" style={{maxWidth: "100px"}}>
@@ -52,6 +53,7 @@ export default function TurnNavigation({ playerActionHistory, turnNumber, setTur
           <div>
             <button className={className} onClick={() => setTurnNumber(iteratedTurnNumber)}>
               {gameUtils.getCellDisplayNumber(playerAction)}
+              {gameUtils.getWinningLine(boardSquaresHistory[iteratedTurnNumber]) ? (<Trophy color="#000" size={13} strokeWidth={1} />) : null}
             </button>
           </div>
         </div>
