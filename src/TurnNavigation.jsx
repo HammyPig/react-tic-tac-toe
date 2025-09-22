@@ -7,7 +7,7 @@ import * as gameUtils from "./gameUtils";
 export default function TurnNavigation({ boardSquaresHistory, playerActionHistory, turnNumber, setTurnNumber, onGameReset }) {
   const playersHeaderRow = gameUtils.players.map((player, i) => {
     return (
-      <div className="block" style={{width: "100px"}}>
+      <div className="block" style={{width: `${100 / (gameUtils.players.length + 2)}%`}}>
           <div>
             <span className="turn-history-header-text" >
               {player}
@@ -18,7 +18,7 @@ export default function TurnNavigation({ boardSquaresHistory, playerActionHistor
   });
 
   playersHeaderRow.splice(0, 0, (
-    <div className="block" style={{width: "200px"}}>
+    <div className="block" style={{width: `${200 / (gameUtils.players.length + 2)}%`}}>
       <div>
         <span className="turn-history-header-text">
           Turn
@@ -30,7 +30,7 @@ export default function TurnNavigation({ boardSquaresHistory, playerActionHistor
   const turnsTakenList = [];
 
   turnsTakenList.push(
-    <div className="block turn-history-header-row">
+    <div className="block turn-history-header-row" style={{gap: 0}}>
       {playersHeaderRow}
     </div>
   )
@@ -49,7 +49,7 @@ export default function TurnNavigation({ boardSquaresHistory, playerActionHistor
       }
 
       return (
-        <div className="block" style={{width: "100px"}}>
+        <div className="block" style={{width: `${100 / (gameUtils.players.length + 2)}%`}}>
           <div>
             <button className={className} onClick={() => setTurnNumber(iteratedTurnNumber)}>
               {gameUtils.getCellDisplayNumber(playerAction)}
@@ -61,7 +61,7 @@ export default function TurnNavigation({ boardSquaresHistory, playerActionHistor
     });
 
     playerActionsDuringTurnButtons.splice(0, 0, (
-      <div className="block" style={{width: "200px"}}>
+      <div className="block" style={{width: `${200 / (gameUtils.players.length + 2)}%`}}>
         <div>
           <span className="turn-history-header-text">
             {i / gameUtils.players.length + 1}.
@@ -71,7 +71,7 @@ export default function TurnNavigation({ boardSquaresHistory, playerActionHistor
     ));
 
     turnsTakenList.push(
-      <div className="block turn-history-row">
+      <div className="block turn-history-row" style={{gap: 0}}>
         {playerActionsDuringTurnButtons}
       </div>
     );
