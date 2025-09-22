@@ -1,15 +1,7 @@
 import * as gameUtils from "./gameUtils";
 import Square from "./Square";
 
-export default function Board({ squares, highlightedSquares, turnNumber, onPlay }) {
-  function handleClick(cellId) {
-    if (squares[cellId] || gameUtils.getWinner(squares)) {
-      return;
-    }
-
-    onPlay(cellId);
-  }
-
+export default function Board({ squares, highlightedSquares, turnNumber, onPlay, isDisabled }) {
   function renderGrid() {
     const grid = [];
     const nRows = Math.sqrt(squares.length);
@@ -26,7 +18,8 @@ export default function Board({ squares, highlightedSquares, turnNumber, onPlay 
             displayNumber={gameUtils.getCellDisplayNumber(cellId)}
             value={squares[cellId]}
             isHighlighted={highlightedSquares[cellId]}
-            onSquareClick={() => handleClick(cellId)}
+            onSquareClick={() => onPlay(cellId)}
+            isDisabled={isDisabled}
           />
         );
       }

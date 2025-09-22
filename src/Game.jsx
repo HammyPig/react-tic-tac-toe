@@ -30,11 +30,14 @@ export default function Game() {
   const boardSquares = boardSquaresHistory[turnNumber];
   const winningLine = gameUtils.getWinningLine(boardSquares);
   const highlightedSquares = Array(9).fill(false);
+  let isBoardDisabled = false;
 
   if (winningLine) {
     for (let i = 0; i < winningLine.length; i++) {
       highlightedSquares[winningLine[i]] = true;
     }
+
+    isBoardDisabled = true;
   } else {
     if (turnNumber > 0) {
       highlightedSquares[playerActionHistory[turnNumber - 1]] = true;
@@ -49,6 +52,7 @@ export default function Game() {
           highlightedSquares={highlightedSquares}
           turnNumber={turnNumber}
           onPlay={handlePlay}
+          isDisabled={isBoardDisabled}
         />
       </div>
       <div className="block">
