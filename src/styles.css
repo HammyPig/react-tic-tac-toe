@@ -48,7 +48,7 @@ body {
   font-size: 30cqw;
   font-weight: bold;
   line-height: 34px;
-  width: calc(100% / 3);
+  width: 33.333333%;
   aspect-ratio: 1;
   position: relative;
 }
